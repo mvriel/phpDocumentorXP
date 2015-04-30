@@ -1,0 +1,58 @@
+@startuml
+
+interface DocumentationItemBuilder
+
+class Generator <<Service>> {
+    + generate()
+}
+
+class DocumentationRepository <<Repository>>
+class Documentation <<Entity>>
+class Guide <<Entity>>
+class Api <<Entity>>
+
+namespace Actions {
+    class RenderUsingTwig <<Command>>
+    class RenderUsingTwigHandler <<CommandHandler>>
+}
+
+namespace Api {
+    namespace Php {
+        namespace Elements {
+            abstract class BaseElement
+            class Class_
+            class ClassConstant
+            class Constant
+            class Function_
+            class Interface_
+            class Method
+            class Namespace_
+            class Property
+            class Trait_
+        }
+        class Builder <<Factory>>
+        class DocBlock <<ValueObject>>
+        class ElementFactory <<Factory>>
+        class GenerateCommand <<Command>>
+        class GenerateHandler <<CommandHandler>>
+        class Visibility <<ValueObject>>
+    }
+
+    class Element <<Entity>>
+    class Fqsen <<ValueObject>>
+    class Language <<ValueObject>>
+}
+
+namespace Template {
+    class Template <<Entity>>
+    class RenderCommand <<Command>>
+    class RenderHandler <<CommandHandler>>
+}
+
+Generator *-> DocumentationRepository
+Generator - RenderCommand
+
+Documentation *--> Api
+Documentation *-> Guide
+
+@enduml
