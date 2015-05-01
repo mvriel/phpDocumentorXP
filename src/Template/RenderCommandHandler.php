@@ -2,7 +2,7 @@
 
 namespace phpDocumentor\Template;
 
-class RenderHandler
+class RenderCommandHandler
 {
     /**
      * @var Renderer

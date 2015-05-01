@@ -3,18 +3,43 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-//Somos\Somos::start()
-//    ->with(Somos\Console\Action::matching('generate')->responds($action))
-//    ->withDefaultScope('cli')
-//    ->handle(new Somos\Console\Go('phpDocumentor', '3.0.0'))
-//;
+$somos = Somos\Somos::start(__DIR__ . '/../src/ServiceDefinitions.php')
+    ->addScope('default', function () { return true; })
+    ->withDefaultScope('default');
 
-// Initialize Container
-$builder = new DI\ContainerBuilder();
-$builder->addDefinitions(__DIR__ . '/../src/ServiceDefinitions.php');
-$container = $builder->build();
+$somos
+    ->handle(new CreateDocsCommand('1.0.0'))
+    ->handle(new phpDocumentor\Api\Php\GenerateCommand('1.0.0', realpath(__DIR__ . '/../src')))
+    //->handle(new \phpDocumentor\Guides\ReST\GenerateCommand($documentation, realpath(__DIR__ . '/../../phpDocumentor/phpDocumentor2/docs/guides')));
+    ->handle(new phpDocumentor\Template\RenderCommand('/my/template', $somos))
+;
 
-// Create 'front controller' and run phpDocumentor
-/** @var phpDocumentor\Generator $generator */
-$generator = $container->get(phpDocumentor\Generator::class);
-$generator->generate();
+
+class CreateDocsCommand
+{
+    public $versionNumber;
+
+    public function __construct($versionNumber)
+    {
+        $this->versionNumber = $versionNumber;
+    }
+}
+
+class CreateDocsCommandHandler
+{
+    /**
+     * @var \phpDocumentor\DocumentationRepository
+     */
+    private $documentationRepository;
+
+    public function __construct(\phpDocumentor\DocumentationRepository $documentationRepository)
+    {
+        $this->documentationRepository = $documentationRepository;
+    }
+
+    public function __invoke(CreateDocsCommand $createDocs)
+    {
+        $documentation = \phpDocumentor\Documentation::create('phpDocumentor', $createDocs->versionNumber, __DIR__ . '/..');
+        $this->documentationRepository->persist($documentation);
+    }
+}

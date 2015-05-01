@@ -6,26 +6,12 @@ use phpDocumentor\Documentation;
 
 final class GenerateCommand
 {
-    /** @var Documentation */
-    private $documentation;
-    private $path;
+    public $path;
+    public $versionNumber;
 
-    public function __construct(Documentation $documentation, $path)
+    public function __construct($versionNumber, $path)
     {
-        $this->documentation = $documentation;
         $this->path = $path;
-    }
-
-    public function getDocumentation()
-    {
-        return $this->documentation;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPath()
-    {
-        return $this->path;
+        $this->versionNumber = $versionNumber;
     }
 }

@@ -20,6 +20,18 @@ final class DocumentationRepository
             : null;
     }
 
+    /**
+     * @param string $versionNumber
+     *
+     * @return Documentation|null
+     */
+    public function findByVersionNumber($versionNumber)
+    {
+        return isset($this->documentations[(string)$versionNumber])
+            ? $this->documentations[(string)$versionNumber]
+            : null;
+    }
+
     public function persist(Documentation $documentation)
     {
         $this->documentations[(string)$documentation->getVersion()] = $documentation;

@@ -21,7 +21,6 @@
         "phpdocumentor/finder": "dev-master",
         "gregwar/rst": "dev-master",
         "league/commonmark": "0.8.*@dev",
-        "league/tactician": "0.6.*@dev",
         "twig/twig": "~2.0@dev"
     },
     "require-dev": {

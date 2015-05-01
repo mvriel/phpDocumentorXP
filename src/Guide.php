@@ -13,4 +13,9 @@ final class Guide
     {
         $this->documents[] = $document;
     }
+
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
 }
