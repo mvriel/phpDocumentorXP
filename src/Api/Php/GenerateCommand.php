@@ -2,16 +2,20 @@
 
 namespace phpDocumentor\Api\Php;
 
-use phpDocumentor\Documentation;
+use Eloquent\Pathogen\PathInterface;
+use phpDocumentor\Project\Version;
 
 final class GenerateCommand
 {
+    /** @var PathInterface */
     public $path;
-    public $versionNumber;
 
-    public function __construct($versionNumber, $path)
+    /** @var Version */
+    public $version;
+
+    public function __construct(Version $version, PathInterface $path)
     {
-        $this->path = $path;
-        $this->versionNumber = $versionNumber;
+        $this->version = $version;
+        $this->path    = $path;
     }
 }

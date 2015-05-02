@@ -1,45 +1,24 @@
 #!/usr/bin/env php
 <?php
 
+use Eloquent\Pathogen\Path;
+
 require __DIR__ . '/../vendor/autoload.php';
+
+$version = new phpDocumentor\Project\Version(
+    new \phpDocumentor\Project\VersionId('1.0.0'),
+    new \phpDocumentor\Files\Dsn('file://' . realpath(__DIR__ . '/../'))
+);
+
+$path = Path::fromString('src');
 
 $somos = Somos\Somos::start(__DIR__ . '/../src/ServiceDefinitions.php')
     ->addScope('default', function () { return true; })
     ->withDefaultScope('default');
 
 $somos
-    ->handle(new CreateDocsCommand('1.0.0'))
-    ->handle(new phpDocumentor\Api\Php\GenerateCommand('1.0.0', realpath(__DIR__ . '/../src')))
-    //->handle(new \phpDocumentor\Guides\ReST\GenerateCommand($documentation, realpath(__DIR__ . '/../../phpDocumentor/phpDocumentor2/docs/guides')));
+    ->handle(new phpDocumentor\CreateDocumentationCommand($version))
+    ->handle(new phpDocumentor\Api\Php\GenerateCommand($version, $path))
+    //->handle(new phpDocumentor\Guides\ReST\GenerateCommand($documentation, realpath(__DIR__ . '/../../phpDocumentor/phpDocumentor2/docs/guides')));
     ->handle(new phpDocumentor\Template\RenderCommand('/my/template', $somos))
 ;
-
-
-class CreateDocsCommand
-{
-    public $versionNumber;
-
-    public function __construct($versionNumber)
-    {
-        $this->versionNumber = $versionNumber;
-    }
-}
-
-class CreateDocsCommandHandler
-{
-    /**
-     * @var \phpDocumentor\DocumentationRepository
-     */
-    private $documentationRepository;
-
-    public function __construct(\phpDocumentor\DocumentationRepository $documentationRepository)
-    {
-        $this->documentationRepository = $documentationRepository;
-    }
-
-    public function __invoke(CreateDocsCommand $createDocs)
-    {
-        $documentation = \phpDocumentor\Documentation::create('phpDocumentor', $createDocs->versionNumber, __DIR__ . '/..');
-        $this->documentationRepository->persist($documentation);
-    }
-}

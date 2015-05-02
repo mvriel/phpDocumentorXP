@@ -4,7 +4,6 @@ namespace phpDocumentor;
 
 use phpDocumentor\Files\Dsn;
 use phpDocumentor\Project\Version;
-use phpDocumentor\Project\VersionId;
 
 final class Documentation
 {
@@ -22,9 +21,9 @@ final class Documentation
         $this->version = $version;
     }
 
-    public static function create($title, $versionNumber, $dsn)
+    public static function create($title, Version $version)
     {
-        return new Documentation($title, new Version(new VersionId($versionNumber), new Dsn($dsn)));
+        return new Documentation($title, $version);
     }
 
     public function addGuide(Guide $guide)

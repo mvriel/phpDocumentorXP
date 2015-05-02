@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "33be0cf6b302192bf1a65f54267e4dfc",
+    "hash": "edfc32f13cd3dd8162cd6d6d6bd24d05",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -226,6 +226,61 @@
             "time": "2014-09-09 13:34:57"
         },
         {
+            "name": "eloquent/pathogen",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eloquent/pathogen.git",
+                "reference": "baa1376e1de56ad462cd67794de808d690904fb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eloquent/pathogen/zipball/baa1376e1de56ad462cd67794de808d690904fb8",
+                "reference": "baa1376e1de56ad462cd67794de808d690904fb8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "icecave/isolator": "~2",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "eloquent/liberator": "~2",
+                "icecave/archer": "~1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Eloquent\\Pathogen\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erin Millard",
+                    "email": "ezzatron@gmail.com",
+                    "homepage": "http://ezzatron.com/"
+                },
+                {
+                    "name": "Darian Brown",
+                    "email": "darianbr@gmail.com",
+                    "homepage": "http://www.darian-brown.com/"
+                }
+            ],
+            "description": "General-purpose path library for PHP.",
+            "homepage": "https://github.com/eloquent/pathogen",
+            "keywords": [
+                "file",
+                "filesystem",
+                "manipulation",
+                "path"
+            ],
+            "time": "2014-10-22 01:04:35"
+        },
+        {
             "name": "gregwar/rst",
             "version": "dev-master",
             "target-dir": "Gregwar/RST",
@@ -268,6 +323,58 @@
                 "rst"
             ],
             "time": "2014-12-16 16:45:39"
+        },
+        {
+            "name": "icecave/isolator",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/IcecaveStudios/isolator.git",
+                "reference": "97c51fafa39c57a8f1a31f978a48fbe6cea4a5d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/IcecaveStudios/isolator/zipball/97c51fafa39c57a8f1a31f978a48fbe6cea4a5d5",
+                "reference": "97c51fafa39c57a8f1a31f978a48fbe6cea4a5d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "icecave/archer": "~1"
+            },
+            "suggest": {
+                "eloquent/asplode": "Drop-in exception-based error handling."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Icecave\\Isolator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Harris",
+                    "email": "james.harris@icecave.com.au",
+                    "homepage": "https://github.com/jmalloc"
+                }
+            ],
+            "description": "Dependency injection for global functions.",
+            "homepage": "https://github.com/IcecaveStudios/isolator",
+            "keywords": [
+                "fake",
+                "mock",
+                "phake",
+                "phpunit",
+                "test",
+                "unit"
+            ],
+            "time": "2014-08-12 03:16:11"
         },
         {
             "name": "league/commonmark",
@@ -2468,7 +2575,8 @@
         "phpdocumentor/finder": 20,
         "gregwar/rst": 20,
         "league/commonmark": 20,
-        "twig/twig": 20
+        "twig/twig": 20,
+        "eloquent/pathogen": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

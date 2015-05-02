@@ -21,7 +21,8 @@
         "phpdocumentor/finder": "dev-master",
         "gregwar/rst": "dev-master",
         "league/commonmark": "0.8.*@dev",
-        "twig/twig": "~2.0@dev"
+        "twig/twig": "~2.0@dev",
+        "eloquent/pathogen": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.6",

@@ -31,16 +31,16 @@ class GenerateCommandHandler
 
     public function __invoke(GenerateCommand $command)
     {
-        $documentation = $this->documentationRepository->findByVersionNumber($command->versionNumber);
+        $documentation = $this->documentationRepository->findByVersion($command->version);
         if (! $documentation) {
             throw new \InvalidArgumentException(
                 'Unable to generate API documentation, the documentation for the provided version number "'
-                . $command->versionNumber . '" could not be found'
+                . $command->version . '" could not be found'
             );
         }
         $this->builder->create();
 
-        $specification = new InPath($command->path);
+        $specification = new InPath((string)$command->path);
         $specification = $specification->andX(new HasExtension(['php']));
 
         foreach ($this->finder->find($documentation->getVersion()->getDsn(), $specification) as $path) {
