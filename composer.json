@@ -22,7 +22,9 @@
         "gregwar/rst": "dev-master",
         "league/commonmark": "0.8.*@dev",
         "twig/twig": "~2.0@dev",
-        "eloquent/pathogen": "dev-master"
+        "eloquent/pathogen": "dev-master",
+        "league/flysystem": "~1.1@dev",
+        "league/climate": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.6",
