@@ -1,6 +1,6 @@
 <?php
 
-namespace phpDocumentor\Template;
+namespace phpDocumentor\Renderer;
 
 final class Renderer
 {

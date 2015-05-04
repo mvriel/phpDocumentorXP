@@ -1,6 +1,6 @@
 <?php
 
-namespace phpDocumentor\Template;
+namespace phpDocumentor\Renderer;
 
 class RenderCommand
 {

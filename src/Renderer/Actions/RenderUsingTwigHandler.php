@@ -1,10 +1,8 @@
 <?php
 
-namespace phpDocumentor\Actions;
+namespace phpDocumentor\Renderer\Actions;
 
 use phpDocumentor\Views\ViewFactory;
-use SimpleBus\Message\Handler\MessageHandler;
-use SimpleBus\Message\Message;
 
 final class RenderUsingTwigHandler
 {

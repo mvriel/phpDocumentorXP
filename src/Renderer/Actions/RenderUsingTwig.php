@@ -1,6 +1,6 @@
 <?php
 
-namespace phpDocumentor\Actions;
+namespace phpDocumentor\Renderer\Actions;
 
 final class RenderUsingTwig
 {

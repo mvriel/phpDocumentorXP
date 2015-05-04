@@ -1,6 +1,6 @@
 <?php
 
-namespace phpDocumentor\Template;
+namespace phpDocumentor\Renderer;
 
 class RenderCommandHandler
 {
@@ -19,7 +19,7 @@ class RenderCommandHandler
         // $this->templateRepository->findByPath($renderCommand->getTemplate());
 
         $template = new Template(
-            [new \phpDocumentor\Actions\RenderUsingTwig(['view' => 'MyView', 'template' => 'index.html.twig'])],
+            [new \phpDocumentor\Renderer\Actions\RenderUsingTwig(['view' => 'MyView', 'template' => 'index.html.twig'])],
             ['location' => '/path/to/clean/template']
         );
 

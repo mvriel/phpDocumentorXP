@@ -1,8 +1,6 @@
 <?php
 
-namespace phpDocumentor\Template;
-
-use SimpleBus\Message\Message;
+namespace phpDocumentor\Renderer;
 
 class Template
 {
@@ -32,7 +30,7 @@ class Template
     }
 
     /**
-     * @return Message[]
+     * @return object[]
      */
     final public function getActions()
     {
