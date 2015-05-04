@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    targetNamespace="http://www.phpdoc.org"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:pd="http://www.phpdoc.org"
+    version="3.0"
+>
+  <xs:simpleType name="dsn"><xs:restriction base="xs:string"/></xs:simpleType>
+  <xs:simpleType name="version"><xs:restriction base="xs:string"/></xs:simpleType>
+  <xs:simpleType name="path"><xs:restriction base="xs:string"/></xs:simpleType>
+
+  <xs:complexType name="phpdocumentorType">
+    <xs:sequence>
+      <xs:element name="paths" type="pd:pathsType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="version" type="pd:versionType" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="version" type="pd:version" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="pathsType">
+    <xs:sequence>
+      <xs:element name="output" type="pd:path" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="cache" type="pd:path" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="versionType" mixed="true">
+    <xs:sequence>
+      <xs:element name="api" type="pd:apiType" minOccurs="0"/>
+      <xs:element name="guide" type="pd:guideType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="number" type="pd:version" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="apiType">
+    <xs:sequence>
+      <xs:element name="dsn" type="pd:dsn" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="path" type="pd:path" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="ignore" type="pd:path" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="language" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="guideType">
+    <xs:sequence>
+      <xs:element name="dsn" type="pd:dsn" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="path" type="pd:path" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="language" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:element name="phpdocumentor" type="pd:phpdocumentorType"/>
+</xs:schema>

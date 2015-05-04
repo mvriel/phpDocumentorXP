@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<phpdocumentor
+    version="3"
+    xmlns="http://www.phpdoc.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.phpdoc.org phpdoc.xsd"
+>
+    <paths>
+        <!--<output>build/docs</output>-->
+        <cache>/tmp/phpdoc-doc-cache</cache>
+    </paths>
+    <version number="1.0.0">
+        <api language="php">
+            <dsn>file://.</dsn>
+            <path>src</path>
+            <ignore>src/ServiceDefinitions.php</ignore>
+        </api>
+        <guide language="rst">
+            <dsn>file://../phpDocumentor/phpDocumentor2</dsn>
+            <path>docs</path>
+        </guide>
+    </version>
+</phpdocumentor>
