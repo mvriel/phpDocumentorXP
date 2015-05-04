@@ -2,25 +2,23 @@
 
 namespace phpDocumentor\Project;
 
-use phpDocumentor\Files\Dsn;
-
-class Version
+final class Version
 {
     /** @var VersionId */
     private $versionIdentifier;
 
-    /** @var Dsn */
-    private $source;
+    /** @var Version\Definition */
+    private $definition;
 
-    public function __construct(VersionId $versionIdentifier, Dsn $source)
+    public function __construct(VersionId $versionIdentifier, Version\Definition $definition)
     {
         $this->versionIdentifier = $versionIdentifier;
-        $this->source = $source;
+        $this->definition        = $definition;
     }
 
-    public function getDsn()
+    public function getDefinition()
     {
-        return $this->source;
+        return $this->definition;
     }
 
     public function __toString()
