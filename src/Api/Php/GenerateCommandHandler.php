@@ -13,20 +13,13 @@ class GenerateCommandHandler
     /** @var DocumentationItemBuilder */
     private $builder;
 
-    /** @var Finder */
-    private $finder;
-
     /** @var DocumentationRepository */
     private $documentationRepository;
 
-    public function __construct(
-        DocumentationRepository $documentationRepository,
-        DocumentationItemBuilder $builder,
-        Finder $finder
-    ) {
+    public function __construct(DocumentationRepository $documentationRepository, DocumentationItemBuilder $builder)
+    {
         $this->documentationRepository = $documentationRepository;
         $this->builder                 = $builder;
-        $this->finder                  = $finder;
     }
 
     public function __invoke(GenerateCommand $command)
@@ -40,10 +33,19 @@ class GenerateCommandHandler
         }
         $this->builder->create();
 
-        $specification = new InPath((string)$command->path);
-        $specification = $specification->andX(new HasExtension(['php']));
+        $definition = $command->definition;
 
-        foreach ($this->finder->find($documentation->getVersion()->getDsn(), $specification) as $path) {
+        $specification = new HasExtension($definition->extensions);
+        foreach ($definition->directories as $path) {
+            $specification = $specification->andX(new InPath($path));
+        }
+        foreach ($definition->ignorePaths as $path) {
+            $specification = $specification->not(new InPath($path));
+        }
+
+        $fileSystem = new \League\Flysystem\Filesystem(new \League\Flysystem\Adapter\Local(__DIR__ . '/..'));
+        $fileSystem->addPlugin(new \phpDocumentor\FlyFinder());
+        foreach ($fileSystem->find($specification) as $path) {
             $this->builder->addPath($path);
         }
 
