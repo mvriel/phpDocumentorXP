@@ -4,37 +4,37 @@ namespace phpDocumentor\Api\Php;
 
 use phpDocumentor\Api\Language;
 use phpDocumentor\Api;
+use phpDocumentor\DocumentGroup;
 use phpDocumentor\Files\File;
 use PhpParser\Node;
+use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor;
+use PhpParser\Parser;
 
-final class DocumentationItemBuilder implements \phpDocumentor\DocumentationItemBuilder
+final class PhpReferenceBuilder implements \phpDocumentor\DocumentGroupBuilder
 {
     /**
-     * @var \PhpParser\Parser
+     * @var Parser
      */
     private $phpParser;
 
     /**
-     * @var \PhpParser\NodeTraverser
+     * @var NodeTraverser
      */
     private $traverser;
 
     /**
      * @var Api
      */
-    private $documentationItem;
+    private $documentGroup;
 
     /**
      * @var ElementFactory
      */
     private $factory;
 
-    public function __construct(
-        \PhpParser\Parser $phpParser,
-        \PhpParser\NodeTraverser $traverser,
-        ElementFactory $factory
-    ) {
+    public function __construct(Parser $phpParser, NodeTraverser $traverser, ElementFactory $factory)
+    {
         $this->phpParser = $phpParser;
         $this->traverser = $traverser;
         $this->factory   = $factory;
@@ -42,17 +42,17 @@ final class DocumentationItemBuilder implements \phpDocumentor\DocumentationItem
 
     public function create()
     {
-        $this->documentationItem = new Api(new Language('php'));
+        $this->documentGroup = new Api(new Language('php'));
     }
 
-    public function load($documentationItem)
+    public function load(DocumentGroup $documentGroup)
     {
-        $this->documentationItem = $documentationItem;
+        $this->documentGroup = $documentGroup;
     }
 
     public function build()
     {
-        return $this->documentationItem;
+        return $this->documentGroup;
     }
 
     /**
@@ -71,7 +71,7 @@ final class DocumentationItemBuilder implements \phpDocumentor\DocumentationItem
                 continue;
             }
 
-            $this->documentationItem->addElement($element);
+            $this->documentGroup->addElement($element);
         }
     }
 

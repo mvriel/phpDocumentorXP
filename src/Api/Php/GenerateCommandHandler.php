@@ -10,13 +10,13 @@ use phpDocumentor\Project\Version;
 
 class GenerateCommandHandler
 {
-    /** @var DocumentationItemBuilder */
+    /** @var PhpReferenceBuilder */
     private $builder;
 
     /** @var DocumentationRepository */
     private $documentationRepository;
 
-    public function __construct(DocumentationRepository $documentationRepository, DocumentationItemBuilder $builder)
+    public function __construct(DocumentationRepository $documentationRepository, PhpReferenceBuilder $builder)
     {
         $this->documentationRepository = $documentationRepository;
         $this->builder                 = $builder;
@@ -49,6 +49,6 @@ class GenerateCommandHandler
             $this->builder->addPath($path);
         }
 
-        $documentation->addApiSpecification($this->builder->build());
+        $documentation->addDocumentGroup($this->builder->build());
     }
 }

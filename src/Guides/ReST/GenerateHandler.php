@@ -4,10 +4,10 @@ namespace phpDocumentor\Guides\ReST;
 
 class GenerateHandler
 {
-    /** @var DocumentationItemBuilder */
+    /** @var GuideBuilder */
     private $builder;
 
-    public function __construct(DocumentationItemBuilder $builder)
+    public function __construct(GuideBuilder $builder)
     {
         $this->builder = $builder;
     }
@@ -18,6 +18,6 @@ class GenerateHandler
 
         $this->builder->create();
         $this->builder->addPath($command->getPath());
-        $documentation->addGuide($this->builder->build());
+        $documentation->addDocumentGroup($this->builder->build());
     }
 }

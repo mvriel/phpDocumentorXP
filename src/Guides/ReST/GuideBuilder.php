@@ -3,20 +3,21 @@
 namespace phpDocumentor\Guides\ReST;
 
 use Gregwar\RST\Builder as ReSTBuilder;
+use phpDocumentor\DocumentGroup;
 use phpDocumentor\Files;
 use phpDocumentor\Guide;
 use phpDocumentor\Guides\Documents\Html;
 use phpDocumentor\Guides\Path;
 
-class DocumentationItemBuilder implements \phpDocumentor\DocumentationItemBuilder
+class GuideBuilder implements \phpDocumentor\DocumentGroupBuilder
 {
     /** @var Guide */
-    private $documentationItem;
+    private $documentGroup;
 
     /** @var string[] */
     private $directories;
 
-    /** @var DocumentationItemBuilder */
+    /** @var GuideBuilder */
     private $builder;
 
     /** @var boolean */
@@ -31,7 +32,7 @@ class DocumentationItemBuilder implements \phpDocumentor\DocumentationItemBuilde
 
     public function create()
     {
-        $this->documentationItem = new Guide();
+        $this->documentGroup = new Guide();
     }
 
     public function addPath($path)
@@ -60,15 +61,15 @@ class DocumentationItemBuilder implements \phpDocumentor\DocumentationItemBuilde
 
             $document = new Html(new Path($documentData['file']), $contents);
             $document->setTitle($documentData['title']);
-            $this->documentationItem->addDocument($document);
+            $this->documentGroup->addDocument($document);
         }
 
-        return $this->documentationItem;
+        return $this->documentGroup;
     }
 
-    public function load($documentationItem)
+    public function load(DocumentGroup $documentGroup)
     {
-        $this->documentationItem = $documentationItem;
+        $this->documentGroup = $documentGroup;
     }
 
     /**

@@ -4,7 +4,7 @@ namespace phpDocumentor;
 
 use phpDocumentor\Guides\Document;
 
-final class Guide
+final class Guide implements DocumentGroup
 {
     /** @var Document */
     private $documents;

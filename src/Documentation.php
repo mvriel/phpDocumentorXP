@@ -11,9 +11,7 @@ final class Documentation
 
     private $version;
 
-    private $guides = array();
-
-    private $apiSpecifications = array();
+    private $documentGroups = array();
 
     public function __construct($title, Version $version)
     {
@@ -26,24 +24,14 @@ final class Documentation
         return new Documentation($title, $version);
     }
 
-    public function addGuide(Guide $guide)
+    public function addDocumentGroup(DocumentGroup $specification)
     {
-        $this->guides[] = $guide;
+        $this->documentGroups[] = $specification;
     }
 
-    public function getGuides()
+    public function getDocumentGroups()
     {
-        return $this->guides;
-    }
-
-    public function addApiSpecification(Api $specification)
-    {
-        $this->apiSpecifications[] = $specification;
-    }
-
-    public function getApiSpecifications()
-    {
-        return $this->apiSpecifications;
+        return $this->documentGroups;
     }
 
     public function getVersion()

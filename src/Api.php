@@ -4,7 +4,7 @@ namespace phpDocumentor;
 
 use phpDocumentor\Api\Language;
 
-final class Api
+final class Api implements DocumentGroup
 {
     /**
      * @var Language

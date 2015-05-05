@@ -2,10 +2,10 @@
 
 namespace phpDocumentor;
 
-interface DocumentationItemBuilder
+interface DocumentGroupBuilder
 {
     public function create();
-    public function load($documentationItem);
+    public function load(DocumentGroup $documentGroup);
     public function addPath($path);
     public function build();
 }
