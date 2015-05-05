@@ -1,0 +1,110 @@
+@startuml
+
+class Documentation <<Aggregate Root>>
+class Project.Version
+interface DocumentGroup
+
+Documentation "1" o--> "1" Project.Version
+Documentation "1" o-> "*" DocumentGroup
+DocumentGroup <|. Guides.Guide
+DocumentGroup <|.. ApiReference.Api
+
+namespace Guides {
+    class Guide
+    class Language
+    abstract class Document
+
+    namespace Document {
+        class Html
+    }
+
+    Guides.Guide o--> Guides.Document
+    Guides.Guide o--> Guides.Language
+    Guides.Document <|-- Document.Html
+}
+
+namespace ApiReference {
+    class Api
+    class Element
+    class Fqsen
+    class Language
+
+    namespace Php {
+        class DocBlock
+        class Visibility
+
+        namespace Elements {
+            class Namespace_
+            class Constant
+            class Function_
+            class Class_
+            class Interface_
+            class Trait_
+            class ClassConstant
+            class Property
+            class Method
+
+            ApiReference.Element <|.. Namespace_
+            ApiReference.Element <|.. Class_
+            ApiReference.Element <|.. Interface_
+            ApiReference.Element <|.. Trait_
+            ApiReference.Element <|.. Constant
+            ApiReference.Element <|.. Function_
+            ApiReference.Element <|.. ClassConstant
+            ApiReference.Element <|.. Property
+            ApiReference.Element <|.. Method
+
+            Namespace_ o--> Function_
+            Namespace_ o--> Constant
+            Namespace_ o--> Class_
+            Namespace_ o--> Interface_
+            Namespace_ o--> Trait_
+
+            Class_ o--> Method
+            Class_ o--> Property
+            Class_ o--> ClassConstant
+
+            Interface_ o--> Method
+            Interface_ o--> ClassConstant
+
+            Trait_ o--> Method
+            Trait_ o--> Property
+
+            Class_ o--> Php.DocBlock
+            Interface_ o--> Php.DocBlock
+            Trait_ o--> Php.DocBlock
+            Function_ o--> Php.DocBlock
+            Constant o--> Php.DocBlock
+            ClassConstant o--> Php.DocBlock
+            Property o--> Php.DocBlock
+            Method o--> Php.DocBlock
+
+            Class_ o-> ApiReference.Fqsen
+            Interface_ o-> ApiReference.Fqsen
+            Trait_ o-> ApiReference.Fqsen
+            Function_ o-> ApiReference.Fqsen
+            Constant o-> ApiReference.Fqsen
+            ClassConstant o-> ApiReference.Fqsen
+            Property o-> ApiReference.Fqsen
+            Method o-> ApiReference.Fqsen
+
+            Method o--> Php.Visibility
+            Property o--> Php.Visibility
+        }
+        namespace DocBlock {
+            class Summary
+            class Description
+            class Tag
+
+            Php.DocBlock o--> Summary
+            Php.DocBlock o--> Description
+            Php.DocBlock o--> Tag
+        }
+    }
+    Api "1" o--> "*" Element
+    Api "1" o-> "1" Language
+}
+
+hide members
+
+@enduml

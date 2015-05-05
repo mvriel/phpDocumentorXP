@@ -1,0 +1,13 @@
+@startuml
+
+class Project.Version.Definition
+interface DocumentGroupDefinition
+class Api.Php.Definition
+class Guides.ReST.Definition
+
+Project.Version.Definition "1" o--> "*" DocumentGroupDefinition
+DocumentGroupDefinition <|.. Api.Php.Definition
+DocumentGroupDefinition <|.. Guides.ReST.Definition
+
+hide members
+@enduml
